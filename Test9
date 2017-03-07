@@ -1,0 +1,62 @@
+package com.itheima;
+
+import java.util.Scanner;
+
+/*
+ * 9 在抗战时期都是采用电报传递消息的，
+ * 假设要传递的数据是四位的整数，
+ * 在传递过程中是加密的，加密规则如下：
+ * 每位数字都加上该数字与2的余数,
+ * 再将第一位和第四位交换，第二位和第三位交换。
+ * 
+ * 思路 ： 千百十个   abcd 
+ *    a+a%2    →  d+d%2      1   1+1%2 = 2
+ *    b+b%2    →  c+c%2      2   2+2%2 = 2
+ *    c+c%2    →  b+b%2      3   3+3%2 = 4
+ *    d+d%2    →  a+a%2      4   4+4%2 = 4
+ */
+public class Test9 {
+
+	public static void main(String[] args) {
+		//用户输入四位整数
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入要传递的四位整数！");
+         
+        //定义String类型的str存储用户输入的数据，并判断用户是否输入了四个整数
+        String str = null;
+        while(true){
+        str = sc.next();
+        if(str.matches("[0-9]{4}")){
+            break;
+        }
+        System.out.println("您输入的不是4位整数，请重新输入！");
+        }
+         
+        //定义一个长度为4整型数组
+        Integer array[] = new Integer[4];
+        //遍历数组，将str每个位置上的数字转换成整型后存到array中，同时将每一位加上除以2的余数
+        for (int i = 0; i < array.length; i++) {
+            array[i] = Integer.parseInt(str.substring(i, i+1)) ;
+            array[i] += array[i]%2;
+        }
+         
+        //调换第一位和第四位
+        int temp = 0;
+        temp = array[0];
+        array[0] = array[3];
+        array[3] = temp;
+         
+        //调换第二位和第三位
+        temp = array[1];
+        array[1] = array[2];
+        array[2] = temp;
+         
+        //将转换后的结果输出
+        System.out.println("转换后的结果为：");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+        }
+        System.out.println();
+    }
+	}
+
