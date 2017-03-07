@@ -1,0 +1,33 @@
+package com.itheima;
+/*
+ * 6、某班级考试成绩如下，利用二维数组存储这些数据，
+ * 统计出全班的平均成绩，并将所有低于平均分的同学的坐标输出到控制台。
+ * 比如：“第1组，第3个同学”
+         第1组：89,66,54
+          第2组：77,93,68
+          第3组：55,45,88
+          第4组：71,76,75
+ */
+public class Test6 {
+
+	public static void main(String[] args) {
+		float[][]score={{89,66,54},{77,93,68},{55,45,88},{71,76,75}};
+		  float sum=0;
+		  int count=0;
+		  for(int i=0;i<score.length;i++){
+		   for(int j=0;j<score[i].length;j++){
+		    sum=sum+score[i][j];
+		    count++;
+		   }
+		  }
+		  float average=sum/count;
+		  System.out.println("全班的平均成绩为"+average);
+		  for(int i=0;i<score.length;i++){
+		   for(int j=0;j<score[i].length;j++){
+		    if(score[i][j]<average){
+		     System.out.println("第"+(i+1)+"组，第"+(j+1)+"个同学成绩低于平均分");
+		    }
+		   }
+		  }
+		 }
+}
