@@ -1,0 +1,124 @@
+package com.itheima;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/*
+ * 5、创建一个User类，属性包含：account，passWord；
+ * 
+ * a.封装一个方法，模拟用户注册流程，提示用户输入账号、密码进行注册，
+ * 每注册一个用户创建一个User对象存放到合适的集合中，
+ * 若用户注册重复的账户则提示用户重新输入；
+ * 
+  * b.封装一个方法，模拟用户登录流程，
+   * 根据用户输入的数据在集合中匹配对应的对象，
+    *存在则提示登录成功，不存在则提示重新输入；
+ */
+public class Test5 {
+	public static void main(String[] args) {
+		Bussiness bussiness = new Bussiness();
+        bussiness.Register();
+    bussiness.Register();//  若用户注册重复的账户则提示用户重新输入；
+    
+        User user = new User ();
+        
+        if((user = bussiness.Login())!=null){
+                System.out.println(user.getAccount()+"登陆成功");
+        }else{
+                System.out.println("登陆失败");
+        }
+        
+}
+
+	
+}
+
+class Bussiness{
+    Dao dao = new Dao ();
+    public User Login(){
+            User user = new User();
+            Scanner scan= new Scanner(System.in);
+            System.out.println("输入用户名");
+            user.setAccount(scan.next());
+            System.out.println("输入用密码");
+            user.setPassWord(scan.next());
+            
+            if( dao.find(user)==null){
+                    return null;
+            }else{
+                    return user;
+            }
+            
+    }
+    
+    public void Register(){
+            User user = new User();
+            Scanner scan= new Scanner(System.in);
+            while(true){
+                    System.out.println("输入用户名");
+                    user.setAccount( scan.next());
+                    System.out.println("输入用密码");
+                    user.setPassWord(scan.next());
+                    if(dao.find(user.getAccount())){
+                            System.out.println("已经存在该User.请重新输入");
+                    }else{
+                            dao.add(user);
+                            System.out.println("注册成功");
+                            break;
+                    }
+            }
+    }
+}
+
+
+class Dao {
+    private List<User> list = new ArrayList<User>();
+    public Boolean find(String userName){
+            for (User u :list){
+                    if(u.getAccount().equals(userName)){
+                            return true;
+                    }
+            }
+            return false;
+    }
+    public User find(User user ){
+            
+            for (User u :list){
+                    if(u.getAccount().equals(user.getAccount())&&u.getPassWord().equals(user.getPassWord())){
+                            return u;
+                    }
+            }
+            return null;
+    }
+    public void add(User user ){
+            list.add(user);
+    }
+}
+
+class User{
+	private String account; //账户
+	private String passWord; //密码
+	public User(String account, String passWord) {
+		super();
+		this.account = account;
+		this.passWord = passWord;
+	}
+	public User() {
+		super();
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public String getPassWord() {
+		return passWord;
+	}
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+	
+
+}
