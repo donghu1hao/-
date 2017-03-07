@@ -1,0 +1,29 @@
+package com.itheima;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+ * 3、分析运行结果，说明原理。(没有分析结果不得分)
+ */
+class Date{
+	 int val;
+	}
+
+public class Test3{
+	
+	
+	
+	public static void main(String[] args) {
+		 Date date = new Date();  //只创建一次，每次都被覆盖
+		ArrayList<Date> list = new ArrayList<Date>();
+		for (int i = 100; i < 103; i++) {
+		//	Date date = new Date(); // 每次循环都，创建新对象
+			date.val =i;
+			list.add(date);
+		}
+		for (Date da : list) {
+			System.out.println(da.val);
+		}
+	}
+}
