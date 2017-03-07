@@ -1,0 +1,48 @@
+package com.itheima;
+
+import java.util.Set;
+import java.util.TreeMap;
+
+public class Test2 {
+/*
+ * 2、取出一个字符串中字母出现的次数。
+ * 如：字符串："abcdekka27qoq" ，输出格式为：a(2)b(1)k(2)...
+ * 
+ * 
+ */
+	public static void main(String[] args) {
+ //定义一个字符串
+		String str = "abcdekka27qoq";
+		//定义一个TreeMap集合
+		TreeMap<Character, Integer> tm = new TreeMap<>();
+//      把字符串转换成字符数组  
+        char[] chs = str.toCharArray();  
+        
+//      对数组进行遍历  
+//      如果是字符  
+//          不存在：则把字符做为键，值变为1  
+//      存在：值加1  
+for(Character ch : chs){  
+    if((ch>66&&ch<91)||(ch>96&&ch<123)){  
+        Integer i = tm.get(ch);  
+        if(i==null){  
+            tm.put(ch, 1);  
+        }else {  
+            i++;  
+            tm.put(ch, i);  
+        }  
+    }  
+}  
+
+//遍历输出  
+
+Set<Character> keyset=tm.keySet();  
+//System.out.println(keyset);  
+for(Character chss:keyset){  
+    System.out.print(chss+"("+tm.get(chss)+")");  
+}  
+
+
+	}
+
+}
