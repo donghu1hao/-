@@ -1,0 +1,65 @@
+package com.itheima;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+/*
+ * 有一组奖品：{macBookPro：8988?，三星note7：5695?，
+ * 小米4：2688?，联想P612：866?，iphone7：5688?}
+ * （每个奖品只有一个，并且同一时间只能有一个人抽奖）；
+ * 开启两个线程A、B模拟两个人抽奖的过程（每个人抽取的次数不做限制），
+ * 直到奖品抽完为止，打印出每个人抽到的奖品和价值金额；
+ */
+public class Test8 {
+	public static void main(String[] args) {
+        LuckDraw d=new LuckDraw();
+        Thread t1=new Thread(d);
+        Thread t2=new Thread(d);
+         
+        t1.start();
+        t2.start();
+    }
+ 
+}
+
+class LuckDraw implements Runnable{  // LuckDraw--抽奖
+     
+ArrayList<String> al=new ArrayList<String>();
+    //创建一个获取随机数的对象
+    Random random=new Random();
+     
+{
+        al.add("macBookPro:8988");
+        al.add("三星note7:5695");
+        al.add("小米4：2688");
+        al.add("联想P612:866");
+        al.add("iphone7:5688");
+     
+     
+    
+    }
+     
+     
+     
+    public void run() {
+        while(true){
+            //同一时间只能有一个人抽奖，加锁控制线程
+            synchronized(this){
+                 
+                if(al.isEmpty())
+                    break;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
+                int i=random.nextInt(al.size());  //奖池里的数量
+                System.out.println(Thread.currentThread().getName()+"抽到"+al.get(i));
+                al.remove(i);  //抽到一个，奖池里就少一个
+                 
+            }
+        }
+    }
+     
+}
