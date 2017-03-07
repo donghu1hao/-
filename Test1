@@ -1,0 +1,67 @@
+package com.itheima;
+/*
+ * 1、假如我们在开发一个系统时需要对员工进行建模，
+ * 员工包含 3 个属性：姓名、工号以及工资。
+ * 经理也是员工，除了含有员工的属性外，另为还有一个奖金属性。
+ * 请使用继承的思想设计出员工类和经理类。
+ * 要求类中提供必要的方法进行属性访问。
+ */
+public class Test1 {
+
+	public static void main(String[] args) {
+		
+		Employee em=new Employee("黎活明","ab2017007",6000);
+        Manager ma=new Manager("毕向东","ac2017009",3000);
+        System.out.println("Employee: "+em.getSalary());
+        System.out.println("Manager: "+ma.getSalary(2000));
+}
+
+}
+
+class Employee{
+	 //员工包含 3 个属性：姓名、工号以及工资。
+	   private String name; 
+	    private String number;
+	    private double Salary;
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getNumber() {
+			return number;
+		}
+		public void setNumber(String number) {
+			this.number = number;
+		}
+		public double getSalary() {
+			return Salary;
+		}
+		public void setSalary(double salary) {
+			Salary = salary;
+		}
+	    //构造职工的属性
+		public Employee(String name, String number, double salary) {
+			super();
+			this.name = name;
+			this.number = number;
+			Salary = salary;
+		}
+		
+	
+}
+
+class Manager extends Employee{  //经理类继承员工
+    public double award;   //经理的奖金属性
+	public Manager(String name, String number, double salary) {
+		super(name, number, salary);
+		
+	}
+	
+	public double getSalary(double award){
+        return super.getSalary()+award;
+    }
+	
+	
+}
