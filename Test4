@@ -1,0 +1,62 @@
+package com.itheima;
+
+import java.util.ArrayList;
+
+/*
+ * 4、一个ArrayList对象aList中存有若干个字符串元素，
+ * 现欲遍历该ArrayList对象，
+ * 删除其中所有值为"abc"的字符串元素，请用代码实现。
+ */
+/*
+ * 思路：
+ * 		1.定义一个静态方法，分别传入参数类型ArrayList的形参alist和参数类型String的形参str，
+ * 			使用for循环遍历alist集合，除去给定集合中所有的给定字符串元素，并显示记录删除几次
+ * 		2.在main主函数中测试：
+ * 				创建Arraylist集合
+ * 				添加集合元素
+ * 				通过类名调用静态方法，实现删除其中所有值为"abc"的字符串元素
+ * 				打印输出alist集合
+ */
+public class Test4 {
+
+	public static void main(String[] args) {
+
+	//	创建ArrayList集合
+		ArrayList<String> alist=new ArrayList<String>();
+//		添加若干个元素
+		alist.add("北京");
+		alist.add("bcd");
+		alist.add("东京");
+		alist.add("长城");
+		alist.add("avc");
+		alist.add("武汉");
+		alist.add("abc");
+		alist.add("CCTV");
+		alist.add("abc");
+		alist.add("南京");
+		alist.add("abc");
+		alist.add("abc");
+		alist.add("abc");
+		alist.add("bca");
+		alist.add("bac");
+		alist.add("cab");
+		alist.add("cbd");
+//		类名调用静态方法实现删除其中所有值为"abc"的字符串元素
+		Test4.removeString(alist, "abc");
+//		打印输出alist集合
+		System.out.println(alist);
+}
+	//删除其中所有值为"abc"的字符串元素的静态方法
+	public static void removeString(ArrayList<String> alist,String str){
+//		for循环遍历alist集合
+		for (int i = 0,j=0; i < alist.size(); i++) {
+//		判断Str字符串和alist集合中元素相同，相同则删除该元素，并记录是第几次删除
+			if(str.equals(alist.get(i))){
+				alist.remove(i);
+				j++;
+				System.out.println("删除第"+j+"个"+str);
+			}
+		}
+	}
+
+}
